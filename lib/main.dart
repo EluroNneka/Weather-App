@@ -1,77 +1,93 @@
-import 'package:WeatherApp/Splash.dart';
+import 'package:weather_app/Splash.dart';
 import 'package:flutter/material.dart';
 
-
 void main() {
-  runApp(
-      MaterialApp(
-    title: 'Weather App',
-    home:
-  Welcome()
-  ));
+  runApp(MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Weather App',
+      home: Welcome()));
 }
 
 class Welcome extends StatelessWidget {
-static String location;
-
   @override
   Widget build(BuildContext context) {
-
-    return  Scaffold(
-          backgroundColor: Colors.purpleAccent,
-          //
+    String location;
+    return Scaffold(
+      backgroundColor: Colors.purpleAccent,
+      //
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: EdgeInsets.symmetric(horizontal: 16,),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(' Welcome to My Weather App',
-              style: TextStyle(color: Colors.black, fontSize: 14, ),),
+            Text(
+              'Welcome to My Weather App',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 25,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+            SizedBox(
+              height: 100,
+            ),
+            Text(
+              'Input a country to see the current weather there',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 15,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
             Center(
-             // width: double.infinity,
+              // width: double.infinity,
               child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                   Container(
                     height: 70,
-                    width: MediaQuery.of(context).size.width-150,
+                    width: MediaQuery.of(context).size.width - 150,
                     child: TextFormField(
-                        keyboardType: TextInputType.text,
-                        style: TextStyle(color: Colors.black, fontSize: 14, ),
-                        onChanged: (value) {
-                          location = value;
-                        },
+                      keyboardType: TextInputType.text,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 14,
+                      ),
+                      onChanged: (value) {
+                        location = value;
+                      },
                       decoration: InputDecoration(
                         hintText: 'Enter your country',
-                        isDense:  true,
+                        isDense: true,
                         border: InputBorder.none,
                         filled: true,
                         fillColor: Colors.white38,
-
                       ),
-                      ),
+                    ),
                   ),
-                    //Spacer(),
-                    IconButton(icon: Icon(Icons.arrow_forward), onPressed: () {
-                      MaterialPageRoute(builder: (BuildContext context) {
-                         return MyHome(location: location);
-                      }, settings: RouteSettings(name: MyHome.routeName, arguments: location ));
-                    }
-    ),
-                  ],
-                ),
+                  //Spacer(),
+                  IconButton(
+                      icon: Icon(Icons.arrow_forward),
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (BuildContext context) {
+                            return MyHome(location: location);
+                          },
+                        ));
+                      }),
+                ],
+              ),
             ),
           ],
         ),
       ),
-
-
-
     );
-
   }
 }
-

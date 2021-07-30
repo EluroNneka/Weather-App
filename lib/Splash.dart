@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:WeatherApp/main.dart';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
@@ -25,14 +25,14 @@ class _HomeState extends State<MyHome> {
   var windspeed;
 
   Future getWeather() async {
-    http.Response response = await http.get(Uri(
-        scheme: 'http://api.openweathermap.org',
-        path: '/data/2.5/weather',
-        query: '?q=${widget.location}&appid=f0e9f28578e640fd16707728164bc55c'));
+    http.Response response = await http.get(Uri.https(
+            'api.openweathermap.org',
+        '/data/2.5/weather',
+        {'q ': '${widget.location}&appid=f0e9f28578e640fd16707728164bc55c'}));
 
     var results = jsonDecode(response.body);
     setState(() {
-      this.temperature = results['main']['temp'];
+     this.temperature = results['main']['temp'];
       this.description = results['weather'][0]['description'];
       this.currently = results['weather'][0]['main'];
       this.humidity = results['main']['humidity'];
